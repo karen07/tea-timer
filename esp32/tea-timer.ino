@@ -28,7 +28,7 @@ void loop() {
   if (timer - pretime >= 1000000) {
     int time_min = time_val / 60;
     int time_sec = time_val % 60;
-    display.showNumberDec(time_min * 100 + time_sec, true);
+    display.showNumberDecEx(time_min * 100 + time_sec, 0b01000000);
 
     time_val++;
     pretime = timer;

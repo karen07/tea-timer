@@ -8,9 +8,10 @@
 
 TM1637Display display(CLK, DIO);
 
-void setup() {
-  display.setBrightness(7);
-  pinMode(SENSOR_PIN, INPUT);
+void setup()
+{
+    display.setBrightness(7);
+    pinMode(SENSOR_PIN, INPUT);
 }
 
 int time_val = 0;
@@ -18,21 +19,22 @@ int time_val = 0;
 uint64_t timer = esp_timer_get_time();
 uint64_t pretime = esp_timer_get_time();
 
-void loop() {
-  int state = digitalRead(SENSOR_PIN);
+void loop()
+{
+    int state = digitalRead(SENSOR_PIN);
 
-  if (state == true) {
-    time_val = 0;
-  }
+    if (state == true) {
+        time_val = 0;
+    }
 
-  if (timer - pretime >= 1000000) {
-    int time_min = time_val / 60;
-    int time_sec = time_val % 60;
-    display.showNumberDecEx(time_min * 100 + time_sec, 0b01000000);
+    if (timer - pretime >= 1000000) {
+        int time_min = time_val / 60;
+        int time_sec = time_val % 60;
+        display.showNumberDecEx(time_min * 100 + time_sec, 0b01000000);
 
-    time_val++;
-    pretime = timer;
-  }
+        time_val++;
+        pretime = timer;
+    }
 
-  timer = esp_timer_get_time();
+    timer = esp_timer_get_time();
 }
